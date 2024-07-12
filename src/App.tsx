@@ -2,7 +2,8 @@ import React from 'react';
 import logo from './logo.svg';
 // import './App.css';
 import Counter from './features/counter/counter';
-
+import Post from './features/post/post';
+import AddPostForm from './features/post/addPostForm';
 function App() {
   return (
     <div className="App">
@@ -20,8 +21,10 @@ function App() {
           Learn React
         </a>
       </header> */}
-      <h1 className='text-7xl text-red-500 w-full text-center'>Hello World</h1>
-      <Counter />
+      {/* <h1 className='text-7xl text-red-500 w-full text-center'>Hello World</h1>
+      <Counter /> */}
+      <AddPostForm/>
+      <Post/>
     </div>
   );
 }
