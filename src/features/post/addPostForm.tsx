@@ -41,7 +41,7 @@ const AddPostForm = () => {
                     type="text"
                     value={title}
                     onChange={onTitleChange}
-                    className="border border-black rounded-md"
+                    className="border border-black rounded-md px-2 py-2"
                 />
                 <label>Author</label>
                 <select
@@ -49,9 +49,9 @@ const AddPostForm = () => {
                     name="postAuthor"
                     value={userId}
                     onChange={onAuthorChange}
-                    className="border border-black rounded-md"
+                    className="border border-black rounded-md py-2 px-2"
                 >
-                    <option value=""></option>
+                    <option value="">Select User</option>
                     {users.map((user: any) => (
                         <option key={user.id} value={user.id}>
                             {user.name}
@@ -64,7 +64,7 @@ const AddPostForm = () => {
                     name="postContent"
                     value={content}
                     onChange={onContentChange}
-                    className="border border-black rounded-md"
+                    className="border border-black rounded-md px-2 py-2"
                 />
                 <button className="p-4 my-2 bg-slate-500 border border-black"
                     disabled={!canSave}
