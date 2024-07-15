@@ -16,11 +16,17 @@ interface Post {
     rocket: number;
     eyes: number;
   }
+  userId: string | undefined;
 }
 interface PostsState {
   posts: Post[];
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
+}
+export interface PostData {
+  title: string;
+  body: string;
+  userId: string;
 }
 
 const initialState: PostsState = {
@@ -34,6 +40,11 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
   const response = await axios.get(POSTS_URL);
   return response.data;
 });
+
+export const addNewPost = createAsyncThunk('posts/addNewPost', async (initialPost: PostData) => {
+  const response = await axios.post(POSTS_URL, initialPost)
+  return response.data
+})
 
 const postThunkSlice = createSlice({
   name: "post",
@@ -130,7 +141,33 @@ const postThunkSlice = createSlice({
       .addCase(fetchPosts.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message || 'Unknown error';
-      });
+      })
+      .addCase(addNewPost.fulfilled, (state, action) => {
+        // Fix for API post IDs:
+        // Creating sortedPosts & assigning the id 
+        // would be not be needed if the fake API 
+        // returned accurate new post IDs
+        state.status = 'succeeded';
+        const sortedPosts = state.posts.sort((a, b) => {
+          if (a.id > b.id) return 1
+          if (a.id < b.id) return -1
+          return 0
+        })
+        action.payload.id = sortedPosts[sortedPosts.length - 1].id + 1;
+        // End fix for fake API post IDs 
+
+        action.payload.userId = Number(action.payload.userId)
+        action.payload.date = new Date().toISOString();
+        action.payload.reactions = {
+          thumbsUp: 0,
+          wow: 0,
+          heart: 0,
+          rocket: 0,
+          eyes: 0
+        }
+        console.log(action.payload)
+        state.posts.push(action.payload)
+      })
   },
 });
 export const selectAllPosts = (state: any) => state.postThunk.posts;

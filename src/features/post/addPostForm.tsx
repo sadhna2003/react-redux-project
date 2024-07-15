@@ -2,12 +2,14 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { postAdd } from "./postSlice";
 import { selectAllUser } from "../users/userSlice";
-const AddPostForm = () => {
+import { addNewPost } from "../postWithThunks/postThunkSlice";
+const AddPostForm = ({ fromThunk = false }: { fromThunk: boolean }) => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [userId, setUserId] = useState('');
+    const [addRequestStatus, setAddRequestStatus] = useState('idle');
     const users = useSelector(selectAllUser);
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<any>();
 
     const onTitleChange = (e: any) => {
         setTitle(e.target.value);
@@ -22,10 +24,16 @@ const AddPostForm = () => {
     }
     const onSavePostClicked = () => {
         if (title && content) {
-            dispatch(postAdd(title, content, userId));
+            if (fromThunk) {
+                dispatch(addNewPost({ title, body: content, userId }));
+            }
+            else {
+                dispatch(postAdd(title, content, userId));
+            }
             setTitle('');
             setContent('');
             setUserId('');
+            setAddRequestStatus('idle');
         }
     }
 

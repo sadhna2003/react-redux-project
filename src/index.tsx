@@ -5,10 +5,12 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { store } from './app/store';
 import { Provider } from 'react-redux';
-
+import { fetchUsers } from './features/users/userSlice';
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
+store.dispatch(fetchUsers());
 root.render(
   <React.StrictMode>
     <Provider store={store}>

@@ -24,8 +24,10 @@ function App() {
       </header> */}
       {/* <h1 className='text-7xl text-red-500 w-full text-center'>Hello World</h1>
       <Counter /> */}
-      <AddPostForm/>
-      {/* <Post/> */}
+      <AddPostForm fromThunk={true}/>
+       {/* to understand the basic example pass thunk is false or do not passs it  and uncoment the below  post*/}
+       {/* <AddPostForm fromThunk={false}/>
+      <Post/> */}
       <PostThunkLists/>
     </div>
   );
