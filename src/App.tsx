@@ -4,6 +4,7 @@ import logo from './logo.svg';
 import Counter from './features/counter/counter';
 import Post from './features/post/post';
 import AddPostForm from './features/post/addPostForm';
+import PostThunkLists from './features/postWithThunks/postThunkLists';
 function App() {
   return (
     <div className="App">
@@ -24,7 +25,8 @@ function App() {
       {/* <h1 className='text-7xl text-red-500 w-full text-center'>Hello World</h1>
       <Counter /> */}
       <AddPostForm/>
-      <Post/>
+      {/* <Post/> */}
+      <PostThunkLists/>
     </div>
   );
 }
