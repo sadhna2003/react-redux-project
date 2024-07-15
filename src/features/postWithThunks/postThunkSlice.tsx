@@ -64,36 +64,74 @@ const postThunkSlice = createSlice({
       }
     }
   },
-  extraReducers(builder) {
+  // extraReducers(builder) {
+  //   builder
+  //     .addCase(fetchPosts.pending, (state, action) => {
+  //       state.status = 'loading'
+  //     })
+  //     .addCase(fetchPosts.fulfilled, (state, action) => {
+  //       state.status = 'succeeded'
+  //       // Adding date and reactions
+  //       let min = 1;
+  //       const loadedPosts = action.payload.map((post: any) => {
+  //         post.date = sub(new Date(), { minutes: min++ }).toISOString();
+  //         post.reactions = {
+  //           thumbsUp: 0,
+  //           wow: 0,
+  //           heart: 0,
+  //           rocket: 0,
+  //           eyes: 0
+  //         }
+  //         return post;
+  //       });
+
+  //       // Add any fetched posts to the array
+  //       state.posts = state.posts.concat(loadedPosts)
+  //     })
+  //     .addCase(fetchPosts.rejected, (state, action) => {
+  //       state.status = 'failed'
+  //       state.error = action.error.message || 'Unknown error';
+  //     })
+
+  // }
+  extraReducers: (builder) => {
     builder
-      .addCase(fetchPosts.pending, (state, action) => {
-        state.status = 'loading'
+      .addCase(fetchPosts.pending, (state) => {
+        state.status = 'loading';
       })
       .addCase(fetchPosts.fulfilled, (state, action) => {
-        state.status = 'succeeded'
+        state.status = 'succeeded';
         // Adding date and reactions
         let min = 1;
         const loadedPosts = action.payload.map((post: any) => {
-          post.date = sub(new Date(), { minutes: min++ }).toISOString();
-          post.reactions = {
-            thumbsUp: 0,
-            wow: 0,
-            heart: 0,
-            rocket: 0,
-            eyes: 0
+          // Check if post already exists in state
+          const existingPost = state.posts.find((p) => p.id === post.id);
+          if (!existingPost) {
+            post.date = sub(new Date(), { minutes: min++ }).toISOString();
+            post.reactions = {
+              thumbsUp: 0,
+              wow: 0,
+              heart: 0,
+              rocket: 0,
+              eyes: 0,
+            };
+            // Use 'body' as 'content'
+            post.content = post.body || 'Default content';
+            return post;
+          } else {
+            return null;
           }
-          return post;
         });
 
-        // Add any fetched posts to the array
-        state.posts = state.posts.concat(loadedPosts)
+        // Filter out null posts (duplicates) and add unique posts to state
+        const uniqueLoadedPosts = loadedPosts.filter((post: any) => post !== null);
+        state.posts = state.posts.concat(uniqueLoadedPosts);
       })
       .addCase(fetchPosts.rejected, (state, action) => {
-        state.status = 'failed'
+        state.status = 'failed';
         state.error = action.error.message || 'Unknown error';
-      })
-
-  }
+      });
+  },
 });
 export const selectAllPosts = (state: any) => state.postThunk.posts;
 export const getPostsStatus = (state: any) => state.postThunk.status;
