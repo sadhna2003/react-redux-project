@@ -30,7 +30,7 @@ import PostsExcerpt from "./postsExcerpt";
   
     return (
         <section className="flex flex-col w-full justify-center items-center py-3 gap-3">
-            <h2 className="text-5xl font-semibold">Posts</h2>
+            {/* <h2 className="text-5xl font-semibold">Posts</h2> */}
             {content}
         </section>
     )

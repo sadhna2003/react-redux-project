@@ -46,6 +46,28 @@ export const addNewPost = createAsyncThunk('posts/addNewPost', async (initialPos
   return response.data
 })
 
+export const editPost = createAsyncThunk('posts/editPost', async (initialPost: any) => {
+  const { id } = initialPost;
+  try {
+    const response = await axios.put(`${POSTS_URL}/${id}`, initialPost)
+    return response.data
+  } catch (err) {
+    //return err;
+    return initialPost;
+  }
+});
+
+export const deletePost = createAsyncThunk('posts/deletePost', async (initialPost: any) => {
+  const { id } = initialPost;
+  try {
+    const response = await axios.delete(`${POSTS_URL}/${id}`)
+    if (response?.status === 200) return initialPost;
+    return Promise.reject();
+  } catch (err) {
+    return err
+  }
+})
+
 const postThunkSlice = createSlice({
   name: "post",
   initialState: initialState,
@@ -168,10 +190,32 @@ const postThunkSlice = createSlice({
         console.log(action.payload)
         state.posts.push(action.payload)
       })
+      .addCase(editPost.fulfilled, (state, action) => {
+        if (!action.payload?.id) {
+          console.log('Update could not complete')
+          console.log(action.payload)
+          return;
+        }
+        const { id } = action.payload;
+        action.payload.date = new Date().toISOString();
+        const posts = state.posts.filter(post => post.id !== id);
+        state.posts = [...posts, action.payload];
+      })
+      .addCase(deletePost.fulfilled, (state, action) => {
+                if (!action.payload?.id) {
+                    console.log('Delete could not complete')
+                    console.log(action.payload)
+                    return;
+                }
+                const { id } = action.payload;
+                const posts = state.posts.filter(post => post.id !== id);
+                state.posts = posts;
+            })
+
   },
 });
 export const selectAllPosts = (state: any) => state.postThunk.posts;
-export const selectPostById = (state: any, postId: string) => state.postThunk.posts.find((post: any) => post.id === postId);
+export const selectPostById = (state: any, postId: any) => state.postThunk.posts.find((post: any) => post.id === postId);
 export const getPostsStatus = (state: any) => state.postThunk.status;
 export const getPostsError = (state: any) => state.postThunk.error;
 export const { postThunkAdd, reactionPostThunkAdd } = postThunkSlice.actions;
