@@ -171,6 +171,7 @@ const postThunkSlice = createSlice({
   },
 });
 export const selectAllPosts = (state: any) => state.postThunk.posts;
+export const selectPostById = (state: any, postId: string) => state.postThunk.posts.find((post: any) => post.id === postId);
 export const getPostsStatus = (state: any) => state.postThunk.status;
 export const getPostsError = (state: any) => state.postThunk.error;
 export const { postThunkAdd, reactionPostThunkAdd } = postThunkSlice.actions;
