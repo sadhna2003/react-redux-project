@@ -6,7 +6,9 @@ import reportWebVitals from './reportWebVitals';
 import { store } from './app/store';
 import { Provider } from 'react-redux';
 import { fetchUsers } from './features/users/userSlice';
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ApiProvider } from '@reduxjs/toolkit/query/react';
+import { apiSlice } from './features/api/apiSlice';
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
@@ -14,14 +16,17 @@ const root = ReactDOM.createRoot(
 store.dispatch(fetchUsers());
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
-    {/* <App /> */}
+    {/* <Provider store={store}>
+    <App /> //uncommented this when you dont want to use router
     <Router>
       <Routes>
         <Route path='/*' element={<App />} />
       </Routes>
     </Router>
-    </Provider>
+    </Provider> */}
+    <ApiProvider api={apiSlice}>
+      <App />
+    </ApiProvider>
   </React.StrictMode>
 );
 

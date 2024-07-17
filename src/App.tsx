@@ -11,6 +11,8 @@ import Layout from './component/layout';
 import EditPostForm from './features/post/editPostForm';
 import UserPage from './features/users/userPage';
 import UsersList from './features/users/usersList';
+import Todo from './features/todos/todo';
+
 function App() {
   return (
     // <div className="App">
@@ -36,27 +38,33 @@ function App() {
     //   <Post/> */}
     //   <PostThunkLists/>
     // </div>
+
+
+    // <div className=''>
+    // <Routes>
+    //   <Route path="/" element={<Layout />}>
+
+    //     <Route index element={<PostThunkLists />} />
+
+    //     <Route path="post">
+    //       <Route index element={<AddPostForm fromThunk={true} />} />
+    //       <Route path=":postId" element={<SinglePost />} />
+    //       <Route path="edit/:postId" element={<EditPostForm fromThunk={true} />} />
+    //       {/* <Route path="addPostForm/:postId" element={<AddPostForm fromThunk={true} />} /> */}
+
+    //     </Route>
+
+    //     <Route path="users">
+    //       <Route index element={<UsersList />} />
+    //       <Route path=":userId" element={<UserPage />} />
+    //     </Route>
+
+    //   </Route>
+    // </Routes>
+    // </div>
+
     <div className=''>
-    <Routes>
-      <Route path="/" element={<Layout />}>
-
-        <Route index element={<PostThunkLists />} />
-
-        <Route path="post">
-          <Route index element={<AddPostForm fromThunk={true} />} />
-          <Route path=":postId" element={<SinglePost />} />
-          <Route path="edit/:postId" element={<EditPostForm fromThunk={true} />} />
-          {/* <Route path="addPostForm/:postId" element={<AddPostForm fromThunk={true} />} /> */}
-
-        </Route>
-
-        <Route path="users">
-          <Route index element={<UsersList />} />
-          <Route path=":userId" element={<UserPage />} />
-        </Route>
-
-      </Route>
-    </Routes>
+          <Todo />
     </div>
   );
 }
