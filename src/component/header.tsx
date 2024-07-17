@@ -8,6 +8,7 @@ const Header = () => {
                 <ul className="flex gap-4 flex-row w-full justify-start text-md font-medium">
                     <li><Link to="/">Home</Link></li>
                     <li><Link to="post">Post</Link></li>
+                    <li><Link to="users">Users</Link></li>
                 </ul>
             </nav>
         </header>

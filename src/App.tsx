@@ -9,6 +9,8 @@ import SinglePost from './features/postWithThunks/singlePost';
 import { Routes, Route } from 'react-router-dom';
 import Layout from './component/layout';
 import EditPostForm from './features/post/editPostForm';
+import UserPage from './features/users/userPage';
+import UsersList from './features/users/usersList';
 function App() {
   return (
     // <div className="App">
@@ -46,6 +48,11 @@ function App() {
           <Route path="edit/:postId" element={<EditPostForm fromThunk={true} />} />
           {/* <Route path="addPostForm/:postId" element={<AddPostForm fromThunk={true} />} /> */}
 
+        </Route>
+
+        <Route path="users">
+          <Route index element={<UsersList />} />
+          <Route path=":userId" element={<UserPage />} />
         </Route>
 
       </Route>

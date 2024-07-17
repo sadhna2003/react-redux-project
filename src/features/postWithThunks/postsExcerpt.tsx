@@ -7,7 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { deletePost } from "./postThunkSlice";
 import { useSelector, useDispatch } from "react-redux";
 const PostsExcerpt = ({ post }: any) => {
-    console.log(post,"post");
+    // console.log(post,"post");
     const navigate = useNavigate();
     const dispatch = useDispatch<any>();
     const onDelete = () => {
