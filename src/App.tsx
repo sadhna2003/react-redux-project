@@ -40,32 +40,32 @@ function App() {
     // </div>
 
 
-    // <div className=''>
-    // <Routes>
-    //   <Route path="/" element={<Layout />}>
-
-    //     <Route index element={<PostThunkLists />} />
-
-    //     <Route path="post">
-    //       <Route index element={<AddPostForm fromThunk={true} />} />
-    //       <Route path=":postId" element={<SinglePost />} />
-    //       <Route path="edit/:postId" element={<EditPostForm fromThunk={true} />} />
-    //       {/* <Route path="addPostForm/:postId" element={<AddPostForm fromThunk={true} />} /> */}
-
-    //     </Route>
-
-    //     <Route path="users">
-    //       <Route index element={<UsersList />} />
-    //       <Route path=":userId" element={<UserPage />} />
-    //     </Route>
-
-    //   </Route>
-    // </Routes>
-    // </div>
-
     <div className=''>
-          <Todo />
+    <Routes>
+      <Route path="/" element={<Layout />}>
+
+        <Route index element={<PostThunkLists />} />
+
+        <Route path="post">
+          <Route index element={<AddPostForm fromThunk={true} />} />
+          <Route path=":postId" element={<SinglePost />} />
+          <Route path="edit/:postId" element={<EditPostForm fromThunk={true} />} />
+          {/* <Route path="addPostForm/:postId" element={<AddPostForm fromThunk={true} />} /> */}
+
+        </Route>
+
+        <Route path="users">
+          <Route index element={<UsersList />} />
+          <Route path=":userId" element={<UserPage />} />
+        </Route>
+
+      </Route>
+    </Routes>
     </div>
+
+    // <div className=''>
+    //       <Todo />
+    // </div>
   );
 }
 

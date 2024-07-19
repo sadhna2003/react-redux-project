@@ -16,17 +16,17 @@ const root = ReactDOM.createRoot(
 store.dispatch(fetchUsers());
 root.render(
   <React.StrictMode>
-    {/* <Provider store={store}>
-    <App /> //uncommented this when you dont want to use router
+    <Provider store={store}>
+    {/* <App /> //uncommented this when you dont want to use router */}
     <Router>
       <Routes>
         <Route path='/*' element={<App />} />
       </Routes>
     </Router>
-    </Provider> */}
-    <ApiProvider api={apiSlice}>
+    </Provider>
+    {/* <ApiProvider api={apiSlice}>
       <App />
-    </ApiProvider>
+    </ApiProvider> */}
   </React.StrictMode>
 );
 

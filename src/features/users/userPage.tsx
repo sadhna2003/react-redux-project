@@ -28,6 +28,7 @@ const UserPage = () => {
                 />
                 <h2>{user?.name}</h2>
             </div>
+            <h1 className="text-3xl font-semibold py-4">Posts</h1>
             <ol className="flex gap-4 flex-col w-full  items-center justify-center text-md font-medium py-2">{postTitles}</ol>
         </section>
     )
