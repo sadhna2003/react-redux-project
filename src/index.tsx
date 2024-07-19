@@ -24,9 +24,10 @@ root.render(
       </Routes>
     </Router>
     </Provider>
+    {/* uncomment below and comment above code to see to do list */}
     {/* <ApiProvider api={apiSlice}>
       <App />
-    </ApiProvider> */}
+    </ApiProvider> */} 
   </React.StrictMode>
 );
 
