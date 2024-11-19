@@ -11,3 +11,17 @@ export const store = configureStore({
         postThunk: postThunkReducer,
     },
 });
+// import { configureStore } from "@reduxjs/toolkit";
+// import { apiSlice } from "../features/api/apiSlice"; // Update the path if necessary
+
+// const store = configureStore({
+//     reducer: {
+//         // Add the RTK Query API reducer
+//         [apiSlice.reducerPath]: apiSlice.reducer,
+//     },
+//     // Add the RTK Query middleware
+//     middleware: (getDefaultMiddleware) =>
+//         getDefaultMiddleware().concat(apiSlice.middleware),
+// });
+
+// export default store;
